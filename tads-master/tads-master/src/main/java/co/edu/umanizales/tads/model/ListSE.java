@@ -122,6 +122,18 @@ public class ListSE {
 
 //      --------------------------------------------------------------------------------
 
-
+    public int getCountKidsByLocationCode(String code){
+        int count =0;
+        if( this.head!=null){
+            Node temp = this.head;
+            while(temp != null){
+                if(temp.getData().getLocation().getCode().equals(code)){
+                    count++;
+                }
+                temp = temp.getNext();
+            }
+        }
+        return count;
+    }
 
 } // Fin de la clase

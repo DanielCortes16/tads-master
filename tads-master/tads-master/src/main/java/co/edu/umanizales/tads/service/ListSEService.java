@@ -18,9 +18,7 @@ public class ListSEService {
         kids = new ListSE();
     }
 
-    public Node getKids() {
-        return kids.getHead();
-    }
+
 
     public float promEdades() {
         return kids.promedioEdades();
