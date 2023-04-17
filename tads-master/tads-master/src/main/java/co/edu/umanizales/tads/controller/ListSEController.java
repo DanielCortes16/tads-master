@@ -1,7 +1,6 @@
 package co.edu.umanizales.tads.controller;
 
 import co.edu.umanizales.tads.controller.dto.ResponseDTO;
-import co.edu.umanizales.tads.service.CiudadService;
 import co.edu.umanizales.tads.service.ListSEService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

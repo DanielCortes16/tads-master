@@ -9,5 +9,5 @@ public class Kid {
     private String identification;
     private String name;
     private byte age;
-    private Ciudad ciudad;
+    private Location location;
 }

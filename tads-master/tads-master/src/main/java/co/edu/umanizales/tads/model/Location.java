@@ -5,8 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class Ciudad {
-    private String nombre;
-    private String cID;
-
+public class Location {
+    private String code;
+    private String name;
 }
