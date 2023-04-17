@@ -136,4 +136,18 @@ public class ListSE {
         return count;
     }
 
+    public int getCountKidsByDepCode(String code){
+        int count =0;
+        if( this.head!=null){
+            Node temp = this.head;
+            while(temp != null){
+                if(temp.getData().getLocation().getCode().contains(code)){
+                    count++;
+                }
+                temp = temp.getNext();
+            }
+        }
+        return count;
+    }
+
 } // Fin de la clase

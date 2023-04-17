@@ -56,4 +56,16 @@ public class ListSEController {
         }
         return new ResponseEntity<>(new ResponseDTO(200,kidsByLocationDTOList, null), HttpStatus.OK);
     }
+
+    @GetMapping(path = "/kidsbydep")
+    public ResponseEntity<ResponseDTO> getKidsByDep(){
+        List<KidsByLocationDTO> kidsByLocationDTOList = new ArrayList<>();
+        for(Location loc: locationService.getLocationsByCodeSize(5)){
+            int count = listSEService.getKids().getCountKidsByDepCode(loc.getCode());
+            if(count>0){
+                kidsByLocationDTOList.add(new KidsByLocationDTO(loc,count));
+            }
+        }
+        return new ResponseEntity<>(new ResponseDTO(200,kidsByLocationDTOList, null), HttpStatus.OK);
+    }
 }
