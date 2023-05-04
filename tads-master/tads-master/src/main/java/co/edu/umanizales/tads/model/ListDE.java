@@ -40,6 +40,7 @@ public class ListDE {
         if (head != null) {
             NodeDE newNodeDE = new NodeDE(pet);
             newNodeDE.setNext(head);
+            head.setPrevious(newNodeDE);
             head = newNodeDE;
         } else {
             head = new NodeDE(pet);
