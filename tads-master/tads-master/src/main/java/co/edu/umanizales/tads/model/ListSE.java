@@ -7,6 +7,23 @@ import lombok.Data;
 public class ListSE {
     private Node head;
 
+    public void orderBoysToStart() {
+        if (this.head != null) {
+            ListSE newList = new ListSE();
+            Node temp = this.head;
+            while (temp != null) {
+                if (temp.getData().getGender() == 'M') {
+                    newList.addToStart(temp.getData());
+                } else {
+                    newList.add(temp.getData());
+                }
+
+                temp = temp.getNext();
+            }
+            this.head = newList.getHead();
+        }
+    }
+
     public void add(Kid kid) {
         if (head != null) {
             Node temp = head;
@@ -77,30 +94,13 @@ public class ListSE {
 
     public void invert() {
         if (this.head != null) {
-            ListSE listCp = new ListSE();
-            Node temp = this.head;
-            while (temp != null) { //hola
-                listCp.addToStart(temp.getData());
-                temp = temp.getNext();
-            }
-            this.head = listCp.getHead();
-        }
-    }
-
-    public void orderBoysToStart() {
-        if (this.head != null) {
-            ListSE listCp = new ListSE();
+            ListSE newList = new ListSE();
             Node temp = this.head;
             while (temp != null) {
-                if (temp.getData().getGender() == 'M') {
-                    listCp.addToStart(temp.getData());
-                } else {
-                    listCp.add(temp.getData());
-                }
-
+                newList.addToStart(temp.getData());
                 temp = temp.getNext();
             }
-            this.head = listCp.getHead();
+            this.head = newList.getHead();
         }
     }
 
@@ -140,7 +140,7 @@ public class ListSE {
 
 //      --------------------------------------------------------------------------------
 
-    public int getCountKidsByLocationCode(String code) {
+    public int getCountKidsByCityCode(String code) {
         int count = 0;
         if (this.head != null) {
             Node temp = this.head;
