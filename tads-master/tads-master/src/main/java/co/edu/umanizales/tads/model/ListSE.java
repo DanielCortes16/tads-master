@@ -118,7 +118,6 @@ public class ListSE {
         return cNiños;
     }
 
-
     public int sumarEdadesNiños() {
         int sEdades = head.getData().getAge();
         if (head != null) {
@@ -212,25 +211,7 @@ public class ListSE {
         }
     }
 
-    public void advancePoss(int pos, Kid code) {
-        if (head != null) {
-            Node temp = head;
-            int cont = 1;
-            ListSE newList = new ListSE();
-            while (temp != null) {
-                if (!temp.getData().getIdentification().equals(code)) {
-                    newList.addToStart(temp.getData());
-                } else {
-                    newList.add(temp.getData());
-                }
-                temp = temp.getNext();
-                cont = cont + 1;
-            }
-            int posF = cont - pos;
-        }
-    }
-
-    public void getNinoNinaList(){
+    public void getNinoNinaList() {
         if (head != null) {
             ListSE newListGirls = new ListSE();
             ListSE newListBoys = new ListSE();
@@ -257,6 +238,36 @@ public class ListSE {
                 }
             }
             head = newListFinal.getHead();
+        }
+    }
+
+    public void advancePoss(int pos, Kid code) {//esta mal pero no tan mal
+        if (head != null) {
+            Node temp = head;
+            int cont = 1;
+            ListSE newList = new ListSE();
+            while (temp != null) {
+                if (temp.getData().getIdentification().equals(code)) {
+                    newList.addToStart(temp.getData());
+                } else {
+                    newList.add(temp.getData());
+                }
+                temp = temp.getNext();
+                cont = cont + 1;
+            }
+            int posF = cont - pos;
+        }
+    }
+
+    public void reportKidsByAge(int ageMin, int ageMax) {
+        if (head != null) {
+            Node temp = head;
+            ListSE newList = new ListSE();
+            while (temp != null) {
+                if(ageMin >= temp.getData().getAge() && ageMax <= temp.getData().getAge() ){
+                    newList.add(temp.getData());
+                }
+            }
         }
     }
 } // Fin de la clase
