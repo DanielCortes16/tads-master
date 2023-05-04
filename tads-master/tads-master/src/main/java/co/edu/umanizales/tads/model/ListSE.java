@@ -20,6 +20,7 @@ public class ListSE {
             head = new Node(kid);
         }
     }
+
     public void addToStart(Kid kid) {
         if (head != null) {
             Node newNode = new Node(kid);
@@ -29,6 +30,7 @@ public class ListSE {
             head = new Node(kid);
         }
     }
+
     public void removeById(String id) {
         if (head != null) {
             Node temp = head;
@@ -42,13 +44,14 @@ public class ListSE {
             }
         }
     }
+
     public void addxPos(Kid kid, int pos) {
         if (head != null) {
             Node temp = head;
             int cont = 1;
             while (cont < pos - 1) {
                 temp = temp.getNext();
-                cont ++;
+                cont++;
             }
             Node newNode = new Node(kid);
             newNode.setNext(temp.getNext());
@@ -57,41 +60,11 @@ public class ListSE {
             head = new Node(kid);
         }
     }
-    public void invert(){
-        if(this.head !=null){
-            ListSE listCp = new ListSE();
-            Node temp = this.head;
-            while(temp != null){
-                listCp.addToStart(temp.getData());
-                temp = temp.getNext();
-            }
-            this.head = listCp.getHead();
-        }
-    }
-    public void orderBoysToStart(){
-        if(this.head !=null){
-            ListSE listCp = new ListSE();
-            Node temp = this.head;
-            while(temp != null){
-                if(temp.getData().getGender()=='M')
-                {
-                    listCp.addToStart(temp.getData());
-                }
-                else{
-                    listCp.add(temp.getData());
-                }
 
-                temp = temp.getNext();
-            }
-            this.head = listCp.getHead();
-        }
-    }
-    public void changeExtremes(){
-        if(this.head !=null && this.head.getNext() !=null)
-        {
+    public void changeExtremes() {
+        if (this.head != null && this.head.getNext() != null) {
             Node temp = this.head;
-            while(temp.getNext()!=null)
-            {
+            while (temp.getNext() != null) {
                 temp = temp.getNext();
             }
             //temp está en el último
@@ -102,6 +75,35 @@ public class ListSE {
 
     }
 
+    public void invert() {
+        if (this.head != null) {
+            ListSE listCp = new ListSE();
+            Node temp = this.head;
+            while (temp != null) { //hola
+                listCp.addToStart(temp.getData());
+                temp = temp.getNext();
+            }
+            this.head = listCp.getHead();
+        }
+    }
+
+    public void orderBoysToStart() {
+        if (this.head != null) {
+            ListSE listCp = new ListSE();
+            Node temp = this.head;
+            while (temp != null) {
+                if (temp.getData().getGender() == 'M') {
+                    listCp.addToStart(temp.getData());
+                } else {
+                    listCp.add(temp.getData());
+                }
+
+                temp = temp.getNext();
+            }
+            this.head = listCp.getHead();
+        }
+    }
+
 //      --------------------------------------------------------------------------------
 
     public int contarNiños() {
@@ -110,7 +112,7 @@ public class ListSE {
             Node temp = head;
             while (temp.getNext() != null) {
                 temp = temp.getNext();
-                cNiños ++;
+                cNiños++;
             }
         }
         return cNiños;
@@ -139,12 +141,12 @@ public class ListSE {
 
 //      --------------------------------------------------------------------------------
 
-    public int getCountKidsByLocationCode(String code){
-        int count =0;
-        if( this.head!=null){
+    public int getCountKidsByLocationCode(String code) {
+        int count = 0;
+        if (this.head != null) {
             Node temp = this.head;
-            while(temp != null){
-                if(temp.getData().getLocation().getCode().equals(code)){
+            while (temp != null) {
+                if (temp.getData().getLocation().getCode().equals(code)) {
                     count++;
                 }
                 temp = temp.getNext();
@@ -153,12 +155,12 @@ public class ListSE {
         return count;
     }
 
-    public int getCountKidsByDepCode(String code){
-        int count =0;
-        if( this.head!=null){
+    public int getCountKidsByDepCode(String code) {
+        int count = 0;
+        if (this.head != null) {
             Node temp = this.head;
-            while(temp != null){
-                if(temp.getData().getLocation().getCode().contains(code)){
+            while (temp != null) {
+                if (temp.getData().getLocation().getCode().contains(code)) {
                     count++;
                 }
                 temp = temp.getNext();
@@ -166,11 +168,12 @@ public class ListSE {
         }
         return count;
     }
-    public void getReportKidsByLocationGendersByAge(byte age, ReportKidsLocationGenderDTO report){
-        if(head !=null){
+
+    public void getReportKidsByLocationGendersByAge(byte age, ReportKidsLocationGenderDTO report) {
+        if (head != null) {
             Node temp = this.head;
-            while(temp!=null){
-                if(temp.getData().getAge()>age){
+            while (temp != null) {
+                if (temp.getData().getAge() > age) {
                     report.updateQuantity(
                             temp.getData().getLocation().getName(),
                             temp.getData().getGender());
@@ -180,4 +183,80 @@ public class ListSE {
         }
     }
 
+//      --------------------------------------------------------------------------------
+
+    public void addByNameAtEnd(String initial) {
+        if (head != null) {
+            Node temp = head;
+            ListSE newList = new ListSE();
+            while (temp != null) {
+                if (temp.getData().getName().startsWith(initial)) {
+                    newList.add(temp.getData());
+                } else {
+                    newList.addToStart(temp.getData());
+                }
+                temp = temp.getNext();
+            }
+        }
+    }
+
+    public void removeKidByAge(int age) {
+        if (head != null) {
+            Node temp = head;
+            while (temp != null) {
+                if (temp.getData().getAge() == age) {
+                    temp.setNext(temp.getNext().getNext());
+                }
+                temp = temp.getNext();
+            }
+        }
+    }
+
+    public void advancePoss(int pos, Kid code) {
+        if (head != null) {
+            Node temp = head;
+            int cont = 1;
+            ListSE newList = new ListSE();
+            while (temp != null) {
+                if (!temp.getData().getIdentification().equals(code)) {
+                    newList.addToStart(temp.getData());
+                } else {
+                    newList.add(temp.getData());
+                }
+                temp = temp.getNext();
+                cont = cont + 1;
+            }
+            int posF = cont - pos;
+        }
+    }
+
+    public void getNinoNinaList(){
+        if (head != null) {
+            ListSE newListGirls = new ListSE();
+            ListSE newListBoys = new ListSE();
+            ListSE newListFinal = new ListSE();
+            Node temp = head;
+            while (temp != null) {
+                if (temp.getData().getGender() == 'F') {
+                    newListGirls.add(temp.getData());
+                } else {
+                    newListBoys.add(temp.getData());
+                }
+                temp = temp.getNext();
+            }
+            Node tempBoys = newListBoys.getHead();
+            Node tempGirls = newListGirls.getHead();
+            while (tempBoys != null || tempGirls != null) {
+                if (tempBoys != null) {
+                    newListFinal.add(tempBoys.getData());
+                    tempBoys = tempBoys.getNext();
+                }
+                if (tempGirls != null) {
+                    newListFinal.add(tempGirls.getData());
+                    tempGirls = tempGirls.getNext();
+                }
+            }
+            head = newListFinal.getHead();
+        }
+    }
 } // Fin de la clase
