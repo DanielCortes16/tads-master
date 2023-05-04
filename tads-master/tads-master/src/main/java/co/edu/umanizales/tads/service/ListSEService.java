@@ -18,8 +18,6 @@ public class ListSEService {
         kids = new ListSE();
     }
 
-
-
     public float promEdades() {
         return kids.promedioEdades();
     }
