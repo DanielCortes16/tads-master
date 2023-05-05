@@ -20,6 +20,7 @@ public class ListDE {
             head = new NodeDE(pet);
         }
     }
+
     public void addxPosDE(Pet pet, int pos) {
         if (head != null) {
             NodeDE temp = head;
@@ -44,20 +45,6 @@ public class ListDE {
             head = newNodeDE;
         } else {
             head = new NodeDE(pet);
-        }
-    }
-
-    public void removeByIdDE(String id) {
-        if (head != null) {
-            NodeDE temp = head;
-            if (head.getData().getIdentification().equals(id)) {
-                head = head.getNext();
-            } else {
-                while (!temp.getNext().getData().getIdentification().equals(id)) {
-                    temp = temp.getNext();
-                }
-                temp.setNext(temp.getNext().getNext());
-            }
         }
     }
 
@@ -124,7 +111,17 @@ public class ListDE {
             NodeDE temp = head;
             while (temp != null) {
                 if (temp.getData().getAge() == age) {
-                    temp.setNext(temp.getNext().getNext());
+                    if (temp == head) {
+                        head = temp.getNext();
+                        if (head != null) {
+                            head.setPrevious(null);
+                        }
+                    } else {
+                        temp.getPrevious().setNext(temp.getNext());
+                        if (temp.getNext() != null) {
+                            temp.getNext().setPrevious(temp.getPrevious());
+                        }
+                    }
                 }
                 temp = temp.getNext();
             }
@@ -164,7 +161,7 @@ public class ListDE {
         return prom;
     }
 
-//      --------------------------------------------------------------------------------
+    //      --------------------------------------------------------------------------------
     public int getCountPetsByCityCode(String code) {
         int count = 0;
         if (this.head != null) {
