@@ -74,9 +74,48 @@ public class ListSEController {
         listSEService.orderBoysToStart();
         return new ResponseEntity<>(new ResponseDTO(200, "Se ordenaron los niños", null), HttpStatus.OK);
     }
+
     @GetMapping(path = "/removebyid")
     public ResponseEntity<ResponseDTO> removeById() {
-        listSEService.removeById("2");
+        listSEService.removeById("");
         return new ResponseEntity<>(new ResponseDTO(200, "Se ah eliminado el niño", null), HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/addxpos")
+    public ResponseEntity<ResponseDTO> addxPos() {
+        return new ResponseEntity<>(new ResponseDTO(200, addxPos(), null), HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/changeextremes")
+    public ResponseEntity<ResponseDTO> changeExtremes() {
+        listSEService.changeExtremes();
+        return new ResponseEntity<>(new ResponseDTO(200, "Se cambiaron los extremos", null), HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/invert")
+    public ResponseEntity<ResponseDTO> invert() {
+        listSEService.invert();
+        return new ResponseEntity<>(new ResponseDTO(200, "Se invirtio la lista", null), HttpStatus.OK);
+    }
+
+
+    @GetMapping(path = "/addbynameatend")
+    public ResponseEntity<ResponseDTO> addByNameAtEnd() {
+        return new ResponseEntity<>(new ResponseDTO(200, addByNameAtEnd(), null), HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/removekidbyage")
+    public ResponseEntity<ResponseDTO> removeKidByAge() {
+        return new ResponseEntity<>(new ResponseDTO(200, removeKidByAge(), null), HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/getninoninalist")
+    public ResponseEntity<ResponseDTO> getNinoNinaList() {
+        return new ResponseEntity<>(new ResponseDTO(200, getNinoNinaList(), null), HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/reportkidsbyage")
+    public ResponseEntity<ResponseDTO> reportKidsByAge() {
+        return new ResponseEntity<>(new ResponseDTO(200, reportKidsByAge(), null), HttpStatus.OK);
     }
 }

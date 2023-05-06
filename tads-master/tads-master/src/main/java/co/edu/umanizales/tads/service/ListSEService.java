@@ -27,5 +27,4 @@ public class ListSEService {
     public void removeKidByAge(int age){kids.removeKidByAge(age);}
     public void getNinoNinaList(){kids.getNinoNinaList();}
     public void reportKidsByAge(int ageMin, int ageMax){kids.reportKidsByAge(ageMin,ageMax);}
-
 }
