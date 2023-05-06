@@ -1,6 +1,7 @@
 package co.edu.umanizales.tads.service;
 
 import co.edu.umanizales.tads.model.ListDE;
+import co.edu.umanizales.tads.model.Pet;
 import lombok.Data;
 import org.springframework.stereotype.Service;
 
@@ -14,4 +15,13 @@ public class ListDEService {
     public float promAges() {
         return pets.promAges();
     }
+    public void addxPosDE(Pet pet, int pos){ pets.addxPosDE(pet, pos);}
+    public void invertDE(){ pets.invertDE();}
+    public void orderPetMToStartDE(){ pets.orderPetMToStartDE();}
+    public void getPetMPetFList(){ pets.getPetMPetFList();}
+    public void removePetByAge(int age){ pets.removePetByAge(age);}
+    public void getCountPetsByCityCode(String code){ pets.getCountPetsByCityCode(code);}
+    public void getCountPetsByDepCode(String code){ pets.getCountPetsByDepCode(code);}
+    public void reportKidsByAgeDE(int ageMin, int ageMax){ pets.reportKidsByAgeDE(ageMin, ageMax);}
+    public void addByNameAtEndDE(String initial){ pets.addByNameAtEndDE(initial);}
 }
