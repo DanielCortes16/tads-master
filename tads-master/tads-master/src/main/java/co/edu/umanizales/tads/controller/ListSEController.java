@@ -76,6 +76,7 @@ public class ListSEController {
     }
     @GetMapping(path = "/removebyid")
     public ResponseEntity<ResponseDTO> removeById() {
-        return new ResponseEntity<>(new ResponseDTO(200, listSEService.removeById(), null), HttpStatus.OK);
+        listSEService.removeById("2");
+        return new ResponseEntity<>(new ResponseDTO(200, "Se ah eliminado el niño", null), HttpStatus.OK);
     }
 }

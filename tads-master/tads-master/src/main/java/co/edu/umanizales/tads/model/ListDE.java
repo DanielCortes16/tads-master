@@ -109,21 +109,22 @@ public class ListDE {
     public void removePetByAge(int age) {
         if (head != null) {
             NodeDE temp = head;
-            while (temp != null) {
-                if (temp.getData().getAge() == age) {
-                    if (temp == head) {
-                        head = temp.getNext();
-                        if (head != null) {
-                            head.setPrevious(null);
-                        }
-                    } else {
-                        temp.getPrevious().setNext(temp.getNext());
-                        if (temp.getNext() != null) {
-                            temp.getNext().setPrevious(temp.getPrevious());
-                        }
+            if (head.getData().getAge() == age) {
+                head = head.getNext();
+                head.setPrevious(null);
+            } else {
+                while (temp != null) {
+                    while (temp.getData().getAge() != age) {
+                        temp = temp.getNext();
                     }
+                    if (temp.getNext() != null) {
+                        temp.getPrevious().setNext(temp.getNext());
+                        temp.getNext().setPrevious(temp.getPrevious());
+                    } else {
+                        temp.getPrevious().setNext(null);
+                    }
+                    temp = temp.getNext();
                 }
-                temp = temp.getNext();
             }
         }
     }
