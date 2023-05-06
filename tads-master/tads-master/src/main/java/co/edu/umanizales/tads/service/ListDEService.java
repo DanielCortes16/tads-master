@@ -19,9 +19,10 @@ public class ListDEService {
     public void invertDE(){ pets.invertDE();}
     public void orderPetMToStartDE(){ pets.orderPetMToStartDE();}
     public void getPetMPetFList(){ pets.getPetMPetFList();}
-    public void removePetByAge(int age){ pets.removePetByAge(age);}
+    public void removePetByAge(Byte age){ pets.removePetByAge(age);}
     public void getCountPetsByCityCode(String code){ pets.getCountPetsByCityCode(code);}
     public void getCountPetsByDepCode(String code){ pets.getCountPetsByDepCode(code);}
-    public void reportKidsByAgeDE(int ageMin, int ageMax){ pets.reportKidsByAgeDE(ageMin, ageMax);}
+    public void reportKidsByAgeDE(int ageMin, int ageMax){ pets.reportPetsByAgeDE(ageMin, ageMax);}
     public void addByNameAtEndDE(String initial){ pets.addByNameAtEndDE(initial);}
+    public void changeExtremesDE(){ pets.changeExtremesDE();}
 }

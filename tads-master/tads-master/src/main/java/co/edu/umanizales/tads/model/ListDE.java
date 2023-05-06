@@ -48,6 +48,19 @@ public class ListDE {
         }
     }
 
+    public void changeExtremesDE() {// creo que lo tengo que cambiar
+        if (this.head != null && this.head.getNext() != null) {
+            NodeDE temp = this.head;
+            while (temp.getNext() != null) {
+                temp = temp.getNext();
+            }
+            //temp está en el último
+            Pet newKid = this.head.getData();
+            this.head.setData(temp.getData());
+            temp.setData(newKid);
+        }
+    }
+
     public void invertDE() {
         if (this.head != null) {
             ListDE newList = new ListDE();
@@ -106,7 +119,7 @@ public class ListDE {
         }
     }
 
-    public void removePetByAge(int age) {
+    public void removePetByAge(Byte age) {
         if (head != null) {
             NodeDE temp = head;
             if (head.getData().getAge() == age) {
@@ -191,7 +204,7 @@ public class ListDE {
         return count;
     }
 
-    public void reportKidsByAgeDE(int ageMin, int ageMax) {
+    public void reportPetsByAgeDE(int ageMin, int ageMax) {
         if (head != null) {
             NodeDE temp = head;
             ListDE newList = new ListDE();

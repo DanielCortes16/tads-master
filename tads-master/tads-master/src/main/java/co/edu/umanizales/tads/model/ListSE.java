@@ -85,11 +85,10 @@ public class ListSE {
                 temp = temp.getNext();
             }
             //temp está en el último
-            Kid copy = this.head.getData();
+            Kid newKid = this.head.getData();
             this.head.setData(temp.getData());
-            temp.setData(copy);
+            temp.setData(newKid);
         }
-
     }
 
     public void invert() {
