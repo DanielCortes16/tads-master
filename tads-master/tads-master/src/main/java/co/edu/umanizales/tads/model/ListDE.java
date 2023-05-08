@@ -230,4 +230,34 @@ public class ListDE {
             }
         }
     }
+    public void removePetXPos(String id) {
+                /*
+        si la lista no esta vacia
+            asignamos un ayudante a la cabeza
+            si la cabeza contiene la identificacion dada
+                la cabeza sera igual al siguiente y el anterior sera vacio.
+
+        si no
+                si el ayudante no es el ultimo nodo
+                el nodo anterior al ayudante agarre al nodo siguiente del ayudante
+                el nodo siguiente al ayudante agarra al nodo anterior del ayudante
+
+                si no el nodo anterior al ayudante agarre al nodo siguiente del ayudante
+         */
+        if (head != null) {
+            NodeDE temp = head;
+            if (head.getData().getIdentification().equals(id)) {
+                head = head.getNext();
+                head.setPrevious(null);
+            } else {
+                if (temp.getNext() != null){
+                    temp.getPrevious().setNext(temp.getNext());
+                    temp.getNext().setPrevious(temp.getPrevious());
+                }else{
+                    temp.getPrevious().setPrevious(null);
+                }
+                temp = temp.getNext();
+            }
+        }
+    }
 }//Fin de clase
