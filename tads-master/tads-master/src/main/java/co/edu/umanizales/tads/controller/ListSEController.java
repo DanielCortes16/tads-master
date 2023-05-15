@@ -75,15 +75,15 @@ public class ListSEController {
         return new ResponseEntity<>(new ResponseDTO(200, "Se ordenaron los niños", null), HttpStatus.OK);
     }
 
-    @GetMapping(path = "/removebyid")
-    public ResponseEntity<ResponseDTO> removeById() {
-        listSEService.removeById("");
+    @GetMapping(path = "/removebyid/{code}")
+    public ResponseEntity<ResponseDTO> removeById(@PathVariable String code) {
+        listSEService.removeById(code);
         return new ResponseEntity<>(new ResponseDTO(200, "Se ah eliminado el niño", null), HttpStatus.OK);
     }
 
-    @GetMapping(path = "/addxpos")
-    public ResponseEntity<ResponseDTO> addxPos() {
-        return new ResponseEntity<>(new ResponseDTO(200, addxPos(), null), HttpStatus.OK);
+    @GetMapping(path = "/addxpos/{code}")
+    public ResponseEntity<ResponseDTO> addxPos(@PathVariable String code) {
+        return new ResponseEntity<>(new ResponseDTO(200, addxPos(code), null), HttpStatus.OK);
     }
 
     @GetMapping(path = "/changeextremes")
@@ -99,19 +99,22 @@ public class ListSEController {
     }
 
 
-    @GetMapping(path = "/addbynameatend")
-    public ResponseEntity<ResponseDTO> addByNameAtEnd() {
-        return new ResponseEntity<>(new ResponseDTO(200, addByNameAtEnd(), null), HttpStatus.OK);
+    @GetMapping(path = "/addbynameatend/{initial}")
+    public ResponseEntity<ResponseDTO> addByNameAtEnd(@PathVariable String initial) {
+        listSEService.addByNameAtEnd(initial);
+        return new ResponseEntity<>(new ResponseDTO(200, "se ordeno re melo jaja", null), HttpStatus.OK);
     }
 
-    @GetMapping(path = "/removekidbyage")
-    public ResponseEntity<ResponseDTO> removeKidByAge() {
-        return new ResponseEntity<>(new ResponseDTO(200, removeKidByAge(), null), HttpStatus.OK);
+    @GetMapping(path = "/removekidbyage/{age}")
+    public ResponseEntity<ResponseDTO> removeKidByAge(@PathVariable int age) {
+        listSEService.removeKidByAge(age);
+        return new ResponseEntity<>(new ResponseDTO(200, "se elimino el niño", null), HttpStatus.OK);
     }
 
     @GetMapping(path = "/getninoninalist")
     public ResponseEntity<ResponseDTO> getNinoNinaList() {
-        return new ResponseEntity<>(new ResponseDTO(200, getNinoNinaList(), null), HttpStatus.OK);
+        listSEService.getNinoNinaList();
+        return new ResponseEntity<>(new ResponseDTO(200, "se intercalaron jaja", null), HttpStatus.OK);
     }
 
     @GetMapping(path = "/reportkidsbyage")

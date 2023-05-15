@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(path = "/listde")
 public class ListDEController {
-    @Autowired
-    private ListDEService listDEService;
+        @Autowired
+        private ListDEService listDEService;
     @Autowired
     private LocationService locationService;
 
@@ -78,5 +78,10 @@ public class ListDEController {
     @GetMapping(path = "/reportpetsbyage")
     public ResponseEntity<ResponseDTO> reportPetsByAgeDE() {
         return new ResponseEntity<>(new ResponseDTO(200, reportPetsByAgeDE(), null), HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/removepetxpos")
+    public ResponseEntity<ResponseDTO> removePetXPos(){
+        return new ResponseEntity<>(new ResponseDTO(200,removePetXPos(),null), HttpStatus.OK);
     }
 }

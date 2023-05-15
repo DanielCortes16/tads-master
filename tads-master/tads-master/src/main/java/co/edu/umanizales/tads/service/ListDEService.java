@@ -25,4 +25,5 @@ public class ListDEService {
     public void reportKidsByAgeDE(int ageMin, int ageMax){ pets.reportPetsByAgeDE(ageMin, ageMax);}
     public void addByNameAtEndDE(String initial){ pets.addByNameAtEndDE(initial);}
     public void changeExtremesDE(){ pets.changeExtremesDE();}
+    public void removePetXPos(String id){pets.removePetXPos(id);}
 }

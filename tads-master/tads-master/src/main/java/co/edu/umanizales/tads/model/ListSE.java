@@ -201,11 +201,15 @@ public class ListSE {
     public void removeKidByAge(int age) {
         if (head != null) {
             Node temp = head;
-            while (temp != null) {
-                if (temp.getData().getAge() == age) {
+            if (head.getData().getAge() == age) {
+                head = head.getNext();
+            } else {
+                while (temp.getNext() != null) {
+                    while (temp.getNext().getData().getAge() != age) {
+                        temp = temp.getNext();
+                    }
                     temp.setNext(temp.getNext().getNext());
                 }
-                temp = temp.getNext();
             }
         }
     }
