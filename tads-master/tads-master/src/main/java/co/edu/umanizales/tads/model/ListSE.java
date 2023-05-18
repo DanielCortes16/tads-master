@@ -184,17 +184,19 @@ public class ListSE {
 //      --------------------------------------------------------------------------------
 
     public void addByNameAtEnd(String initial) {
+        ListSE newListSE = new ListSE();
         if (head != null) {
             Node temp = head;
-            ListSE newList = new ListSE();
             while (temp != null) {
                 if (temp.getData().getName().startsWith(initial)) {
-                    newList.add(temp.getData());
+                    newListSE.add(temp.getData());
+
                 } else {
-                    newList.addToStart(temp.getData());
+                    newListSE.addToStart(temp.getData());
                 }
                 temp = temp.getNext();
             }
+            head = newListSE.head;
         }
     }
 
@@ -267,7 +269,7 @@ public class ListSE {
             Node temp = head;
             ListSE newList = new ListSE();
             while (temp != null) {
-                if(ageMin >= temp.getData().getAge() && ageMax <= temp.getData().getAge() ){
+                if (ageMin >= temp.getData().getAge() && ageMax <= temp.getData().getAge()) {
                     newList.add(temp.getData());
                 }
             }

@@ -29,6 +29,10 @@ public class ListDEController {
     public ResponseEntity<ResponseDTO> promAges(){
         return new ResponseEntity<>(new ResponseDTO(200, listDEService.promAges(), null), HttpStatus.OK);
     }
+    @GetMapping
+    public ResponseEntity<ResponseDTO> getPets(){
+        return new ResponseEntity<>(new ResponseDTO(200, listDEService.getPets().getPets(), null), HttpStatus.OK);
+    }
 
     @PostMapping
     public ResponseEntity<ResponseDTO> addPetDE(@RequestBody PetDTO PetDTO) {
@@ -116,4 +120,5 @@ public class ListDEController {
         }
         return new ResponseEntity<>(new ResponseDTO(200, petsByLocationDTOList, null), HttpStatus.OK);
     }
+
 }

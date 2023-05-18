@@ -2,9 +2,25 @@ package co.edu.umanizales.tads.model;
 
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 public class ListDE {
     private NodeDE head;
+
+    public List<Pet> getPets() {
+        List<Pet> pets = new ArrayList<>();
+        NodeDE temp = head;
+        if (head != null) {
+            while (temp != null) {
+                pets.add(temp.getData());
+                temp = temp.getNext();
+            }
+        }
+        return pets;
+    }
+
 
     public void addDE(Pet pet) {
         if (head != null) {
@@ -230,6 +246,7 @@ public class ListDE {
             }
         }
     }
+
     public void removePetXPos(String id) {
                 /*
         si la lista no esta vacia
@@ -250,10 +267,10 @@ public class ListDE {
                 head = head.getNext();
                 head.setPrevious(null);
             } else {
-                if (temp.getNext() != null){
+                if (temp.getNext() != null) {
                     temp.getPrevious().setNext(temp.getNext());
                     temp.getNext().setPrevious(temp.getPrevious());
-                }else{
+                } else {
                     temp.getPrevious().setPrevious(null);
                 }
                 temp = temp.getNext();
