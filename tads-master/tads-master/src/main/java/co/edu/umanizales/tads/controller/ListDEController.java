@@ -92,9 +92,10 @@ public class ListDEController {
         return new ResponseEntity<>(new ResponseDTO(200, reportPetsByAgeDE(), null), HttpStatus.OK);
     }
 
-    @GetMapping(path = "/removepetxpos")
-    public ResponseEntity<ResponseDTO> removePetXPos() {
-        return new ResponseEntity<>(new ResponseDTO(200, removePetXPos(), null), HttpStatus.OK);
+    @GetMapping(path = "/removepetbyid/{id}")
+    public ResponseEntity<ResponseDTO> removePetXPos(@PathVariable String id) {
+        listDEService.removePetByID(id);
+        return new ResponseEntity<>(new ResponseDTO(200,"se elimino esa chanda" , null), HttpStatus.OK);
     }
 
     @GetMapping(path = "/petsbylocations")

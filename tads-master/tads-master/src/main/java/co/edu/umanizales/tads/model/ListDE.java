@@ -140,19 +140,21 @@ public class ListDE {
             NodeDE temp = head;
             if (head.getData().getAge() == age) {
                 head = head.getNext();
-                head.setPrevious(null);
-            } else {
-                while (temp != null) {
-                    while (temp.getData().getAge() != age) {
+                if (head != null) {
+                    head.setPrevious(null);
+                } else {
+                    while (temp != null) {
+                        while (temp.getData().getAge() != age) {
+                            temp = temp.getNext();
+                        }
+                        if (temp.getNext() != null) {
+                            temp.getPrevious().setNext(temp.getNext());
+                            temp.getNext().setPrevious(temp.getPrevious());
+                        } else {
+                            temp.getPrevious().setNext(null);
+                        }
                         temp = temp.getNext();
                     }
-                    if (temp.getNext() != null) {
-                        temp.getPrevious().setNext(temp.getNext());
-                        temp.getNext().setPrevious(temp.getPrevious());
-                    } else {
-                        temp.getPrevious().setNext(null);
-                    }
-                    temp = temp.getNext();
                 }
             }
         }
@@ -233,21 +235,28 @@ public class ListDE {
     }
 
     public void addByNameAtEndDE(String initial) {
+        ListDE newListDE = new ListDE();
         if (head != null) {
             NodeDE temp = head;
-            ListDE newList = new ListDE();
+            NodeDE previous = null;
             while (temp != null) {
                 if (temp.getData().getName().startsWith(initial)) {
-                    newList.addDE(temp.getData());
+                    newListDE.addDE(temp.getData());
                 } else {
-                    newList.addToStartDE(temp.getData());
+                    newListDE.addToStartDE(temp.getData());
                 }
+                previous = temp;
                 temp = temp.getNext();
+            }
+            head = newListDE.getHead();
+            previous.setNext(newListDE.getHead());
+            if (newListDE.getHead() != null) {
+                newListDE.getHead().setPrevious(previous);
             }
         }
     }
 
-    public void removePetXPos(String id) {
+    public void removePetByID(String id) {
                 /*
         si la lista no esta vacia
             asignamos un ayudante a la cabeza
@@ -265,7 +274,9 @@ public class ListDE {
             NodeDE temp = head;
             if (head.getData().getIdentification().equals(id)) {
                 head = head.getNext();
-                head.setPrevious(null);
+                if (head != null) {
+                    head.setPrevious(null);
+                }
             } else {
                 if (temp.getNext() != null) {
                     temp.getPrevious().setNext(temp.getNext());
@@ -273,7 +284,7 @@ public class ListDE {
                 } else {
                     temp.getPrevious().setPrevious(null);
                 }
-                temp = temp.getNext();
+                temp.getNext();
             }
         }
     }
