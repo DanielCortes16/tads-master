@@ -136,26 +136,22 @@ public class ListDE {
     }
 
     public void removePetByAge(Byte age) {
-        if (head != null) {
-            NodeDE temp = head;
-            if (head.getData().getAge() == age) {
-                head = head.getNext();
-                if (head != null) {
-                    head.setPrevious(null);
+        NodeDE temp = head;
+        while (temp != null) {
+            NodeDE next = temp.getNext();
+            if (temp.getData().getAge() == age) {
+                NodeDE previous = temp.getPrevious();
+                if (previous != null) {
+                    previous.setNext(next);
                 } else {
-                    while (temp != null) {
-                        while (temp.getData().getAge() != age) {
-                            temp = temp.getNext();
-                        }
-                        if (temp.getNext() != null) {
-                            temp.getPrevious().setNext(temp.getNext());
-                            temp.getNext().setPrevious(temp.getPrevious());
-                        } else {
-                            temp.getPrevious().setNext(null);
-                        }
-                        temp = temp.getNext();
-                    }
+                    head = next;
                 }
+                if (next != null) {
+                    next.setPrevious(previous);
+                }
+                temp = next;
+            } else {
+                temp = next;
             }
         }
     }

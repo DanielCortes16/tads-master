@@ -1,7 +1,25 @@
 package co.edu.umanizales.tads.model;
 
+import lombok.Data;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Data
 public class ListDECircular {
     private NodeDE head;
+
+    public List<Pet> getPets() {
+        List<Pet> pets = new ArrayList<>();
+        NodeDE temp = head;
+        if (head != null) {
+            while (temp != null) {
+                pets.add(temp.getData());
+                temp = temp.getNext();
+            }
+        }
+        return pets;
+    }
 
     public void addPetToStart(Pet pet) {
 /*
@@ -41,11 +59,30 @@ public class ListDECircular {
             head.setPrevious(newNode);
         } else {
             head = new NodeDE(pet);
+            head.setNext(head);
+            head.setPrevious(head);
         }
     }
 
-    public void addPetXPos(Pet pet){
-
+    public void addPetXPos(Pet pet) {
+        if (head != null) {
+            NodeDE temp = head;
+            int cont = 1;
+            int poss = 0;
+            while (cont < poss - 1) {
+                temp = temp.getNext();
+                cont++;
+            }
+            NodeDE newNode = new NodeDE(pet);
+            newNode.setNext(temp.getNext());
+            newNode.setPrevious(temp);
+            temp.getNext().setPrevious(newNode);
+            temp.setNext(newNode);
+        } else {
+            head = new NodeDE(pet);
+            head.setNext(head);
+            head.setPrevious(head);
+        }
     }
 
 }// fin de la clase
