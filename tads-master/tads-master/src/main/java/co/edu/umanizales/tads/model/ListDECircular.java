@@ -13,7 +13,7 @@ public class ListDECircular {
         List<Pet> pets = new ArrayList<>();
         NodeDE temp = head;
         if (head != null) {
-            while (temp != null) {
+            while (temp.getNext() != head) {
                 pets.add(temp.getData());
                 temp = temp.getNext();
             }

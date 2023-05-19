@@ -284,4 +284,14 @@ public class ListDE {
             }
         }
     }
+
+    public void gainPositions() {
+        /*
+        si la cabeza tiene datos asignar un ayudante a la cabeza
+        recorremos la lista hasta llegar al nodo indicado
+        creamos una lista copia hasta el nodo indicado
+        avanzamos la cantidad de nodos deseados
+        lo insertamos en esa posicion
+         */
+    }
 }//Fin de clase

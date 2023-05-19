@@ -1,6 +1,5 @@
 package co.edu.umanizales.tads.controller;
 
-import co.edu.umanizales.tads.controller.dto.KidsByLocationDTO;
 import co.edu.umanizales.tads.controller.dto.PetDTO;
 import co.edu.umanizales.tads.controller.dto.PetsByLocationDTO;
 import co.edu.umanizales.tads.controller.dto.ResponseDTO;
@@ -121,5 +120,4 @@ public class ListDEController {
         }
         return new ResponseEntity<>(new ResponseDTO(200, petsByLocationDTOList, null), HttpStatus.OK);
     }
-
 }
