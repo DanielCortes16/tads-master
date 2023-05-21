@@ -33,32 +33,38 @@ public class ListDECircular {
 */
         if (head != null) {
             NodeDE temp = head;
+            temp = temp.getPrevious();
             NodeDE newNode = new NodeDE(pet);
+            temp.setNext(head);
+            head.setPrevious(newNode);
             head = newNode;
-            newNode.getPrevious();
         } else {
             head = new NodeDE(pet);
+            head.setPrevious(head);
+            head.setNext(head);
         }
     }
 
     public void addPet(Pet pet) {
 /*
+    metemos el nuevo perro en un costal
     verificamos si la lista no esta vacia
     nos ubicamos en el ultimo perro (el previo de la cabeza)
-    metemos el nuevo perro en un costal
     nuevo costal agarra la cabeza y el previo
 
     si la lista esta vacia
     la cabeza seria el costal
 */
+        NodeDE newNode = new NodeDE(pet);
+
         if (head != null) {
-            NodeDE temp = head;
-            temp = temp.getPrevious();
-            NodeDE newNode = new NodeDE(pet);
+            newNode = head.getPrevious();
+
             newNode.setNext(head);
-            head.setPrevious(newNode);
+            newNode.getPrevious();
+
         } else {
-            head = new NodeDE(pet);
+            head = newNode;
             head.setNext(head);
             head.setPrevious(head);
         }

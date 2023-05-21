@@ -5,7 +5,6 @@ import co.edu.umanizales.tads.model.Pet;
 import lombok.Data;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 @Service
 @Data
@@ -28,4 +27,5 @@ public class ListDEService {
     public void addByNameAtEndDE(String initial){ pets.addByNameAtEndDE(initial);}
     public void changeExtremesDE(){ pets.changeExtremesDE();}
     public void removePetByID(String id){pets.removePetByID(id);}
+    public void gainXPos(String id, int pos){pets.gainXPos(id, pos);}
 }

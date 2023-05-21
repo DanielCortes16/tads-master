@@ -9,5 +9,4 @@ import org.springframework.stereotype.Service;
 public class ListDECircularService {
     private ListDECircular pets;
     ListDECircularService(){pets = new ListDECircular();}
-
 }

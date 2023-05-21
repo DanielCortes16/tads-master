@@ -246,24 +246,6 @@ public class ListSE {
         }
     }
 
-    public void advancePoss(int pos, Kid code) {//esta mal pero no tan mal
-        if (head != null) {
-            Node temp = head;
-            int cont = 1;
-            ListSE newList = new ListSE();
-            while (temp != null) {
-                if (temp.getData().getIdentification().equals(code)) {
-                    newList.addToStart(temp.getData());
-                } else {
-                    newList.add(temp.getData());
-                }
-                temp = temp.getNext();
-                cont = cont + 1;
-            }
-            int posF = cont - pos;
-        }
-    }
-
     public void reportKidsByAge(int ageMin, int ageMax) {
         if (head != null) {
             Node temp = head;
@@ -274,5 +256,33 @@ public class ListSE {
                 }
             }
         }
+    }
+
+    public void gainXPos(String id, int pos) {
+        Node temp = head;
+        int cont = 1;
+        ListSE newListSE = new ListSE();
+
+        if (head != null) {
+            while (temp != null) {
+                if (!temp.getData().getIdentification().equals(id)) {
+                    newListSE.add(temp.getData());
+                    temp = temp.getNext();
+                    cont++;
+                } else {
+                    newListSE.addToStart(temp.getData());
+                    Kid kidCop = newListSE.getHead().getData();
+                    newListSE.setHead(newListSE.getHead().getNext());
+                    int posFinal = cont - pos;
+                    newListSE.addxPos(kidCop, posFinal);
+                    temp = temp.getNext();
+                }
+            }
+        }
+
+        head = newListSE.getHead();
+    }
+
+    public void loseXPos(String id, int pos) {
     }
 } // Fin de la clase

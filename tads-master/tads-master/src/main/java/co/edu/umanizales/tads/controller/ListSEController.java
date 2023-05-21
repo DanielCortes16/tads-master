@@ -4,6 +4,7 @@ import co.edu.umanizales.tads.controller.dto.KidDTO;
 import co.edu.umanizales.tads.controller.dto.KidsByLocationDTO;
 import co.edu.umanizales.tads.controller.dto.ResponseDTO;
 import co.edu.umanizales.tads.model.Kid;
+import co.edu.umanizales.tads.model.ListSE;
 import co.edu.umanizales.tads.model.Location;
 import co.edu.umanizales.tads.service.ListSEService;
 import co.edu.umanizales.tads.service.LocationService;
@@ -44,6 +45,18 @@ public class ListSEController {
         return new ResponseEntity<>(new ResponseDTO(200, "Se ha adicionado el petacón", null), HttpStatus.OK);
 
     }
+    @PostMapping(path = "addxpos")
+    public ResponseEntity<ResponseDTO> addxPos(@RequestBody KidDTO kidDTO, @PathVariable int pos) {
+        Location location = locationService.getLocationByCode(kidDTO.getCodeLocation());
+        if (location == null) {
+            return new ResponseEntity<>(new ResponseDTO(404, "La ubicación no existe", null), HttpStatus.OK);
+        }
+
+        Kid kid = new Kid(kidDTO.getIdentification(), kidDTO.getName(), kidDTO.getAge(), kidDTO.getGender(), location);
+        listSEService.addxPos(kid, pos);
+
+        return new ResponseEntity<>(new ResponseDTO(200, "Se ha adicionado el petacón", null), HttpStatus.OK);
+    }
 
     @GetMapping(path = "/kidsbylocations")
     public ResponseEntity<ResponseDTO> getKidsByLocation() {
@@ -81,11 +94,6 @@ public class ListSEController {
         return new ResponseEntity<>(new ResponseDTO(200, "Se ah eliminado el niño", null), HttpStatus.OK);
     }
 
-    @GetMapping(path = "/addxpos/{code}")
-    public ResponseEntity<ResponseDTO> addxPos(@PathVariable String code) {
-        return new ResponseEntity<>(new ResponseDTO(200, addxPos(code), null), HttpStatus.OK);
-    }
-
     @GetMapping(path = "/changeextremes")
     public ResponseEntity<ResponseDTO> changeExtremes() {
         listSEService.changeExtremes();
@@ -121,6 +129,15 @@ public class ListSEController {
     public ResponseEntity<ResponseDTO> reportKidsByAge() {
         return new ResponseEntity<>(new ResponseDTO(200, reportKidsByAge(), null), HttpStatus.OK);
     }
+    @GetMapping(path = "/gainxpos/{id}/{pos}")
+    public ResponseEntity<ResponseDTO> gainXPos(@PathVariable String id, @PathVariable int pos){
+        listSEService.gainXPos(id, pos);
+        return  new ResponseEntity<>(new ResponseDTO(200, "el niño avanzo de posicion", null), HttpStatus.OK);
+    }
 
-
+    @GetMapping(path = "/losexpos/{id}/{pos}")
+    public ResponseEntity<ResponseDTO> loseXPos(@PathVariable String id, @PathVariable int pos){
+        listSEService.loseXPos(id, pos);
+        return  new ResponseEntity<>(new ResponseDTO(200, "el niño perdio  posicion", null), HttpStatus.OK);
+    }
 }

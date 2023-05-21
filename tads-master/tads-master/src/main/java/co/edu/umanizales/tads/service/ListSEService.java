@@ -62,4 +62,6 @@ public class ListSEService {
     public void reportKidsByAge(int ageMin, int ageMax) {
         kids.reportKidsByAge(ageMin, ageMax);
     }
+    public void gainXPos(String id, int pos){ kids.gainXPos(id, pos);}
+    public void loseXPos(String id, int pos){ kids.loseXPos(id, pos);}
 }

@@ -120,4 +120,9 @@ public class ListDEController {
         }
         return new ResponseEntity<>(new ResponseDTO(200, petsByLocationDTOList, null), HttpStatus.OK);
     }
+    @GetMapping(path = "/gainxpos/{id}/{pos}")
+    public ResponseEntity<ResponseDTO> gainXPos(@PathVariable String id, @PathVariable int pos){
+        listDEService.gainXPos(id, pos);
+        return  new ResponseEntity<>(new ResponseDTO(200, "el perro avanzo de posicion", null), HttpStatus.OK);
+    }
 }

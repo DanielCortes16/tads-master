@@ -285,13 +285,42 @@ public class ListDE {
         }
     }
 
-    public void gainPositions() {
-        /*
-        si la cabeza tiene datos asignar un ayudante a la cabeza
-        recorremos la lista hasta llegar al nodo indicado
-        creamos una lista copia hasta el nodo indicado
-        avanzamos la cantidad de nodos deseados
-        lo insertamos en esa posicion
-         */
+    /*
+        Verificar si la cabeza de la lista no es nula.
+        Inicializar el ayudante (helper) con la cabeza de la lista.
+        Mientras el ayudante no sea nulo y el ID del ayudante no sea igual al ID ingresado:
+        Avanzar el ayudante al siguiente nodo.
+        mientras el ayudante no es nulo:
+        inicualizar un contador en o
+        avanzar el ayudante al siguiente nodo
+        incrementar el contador en 1
+        Asignar el nodo a mover (nodeToMove) con el valor del ayudante.
+        calcular las posiciones a mover restando el contador acual con el numero de posiciones
+    */
+    public void gainXPos(String id, int pos) {
+        NodeDE temp = head;
+        int posList = 1;
+        ListDE listcop = new ListDE();
+
+        if (head != null) {
+            while (temp != null) {
+                if (!temp.getData().getIdentification().equals(id)) {
+                    listcop.addDE(temp.getData());
+                    temp = temp.getNext();
+                    posList++;
+                } else {
+                    listcop.addToStartDE(temp.getData());
+                    Pet petCop = listcop.getHead().getData();
+                    listcop.setHead(listcop.getHead().getNext());
+                    int posFinal = posList - pos;
+                    listcop.addxPosDE(petCop, posFinal);
+                    temp = temp.getNext();
+                }
+            }
+        }
+
+        head = listcop.getHead();
     }
+
+
 }//Fin de clase
