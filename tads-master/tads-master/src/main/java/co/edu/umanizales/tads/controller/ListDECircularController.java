@@ -2,6 +2,7 @@ package co.edu.umanizales.tads.controller;
 
 import co.edu.umanizales.tads.controller.dto.PetDTO;
 import co.edu.umanizales.tads.controller.dto.ResponseDTO;
+import co.edu.umanizales.tads.exception.ListDEException;
 import co.edu.umanizales.tads.model.Location;
 import co.edu.umanizales.tads.model.Pet;
 import co.edu.umanizales.tads.service.ListDECircularService;
@@ -30,7 +31,7 @@ public class ListDECircularController {
         if (location == null) {
             return new ResponseEntity<>(new ResponseDTO(404, "La ubicación no existe", null), HttpStatus.OK);
         }
-        listDECircularService.getPets().addPet(new Pet(PetDTO.getIdentification(), PetDTO.getName(), PetDTO.getAge(), PetDTO.getGender(), location));
+        listDECircularService.getPets().addPet(new Pet(PetDTO.getIdentification(), PetDTO.getName(), PetDTO.getAge(), PetDTO.getGender(), false, location));
         return new ResponseEntity<>(new ResponseDTO(200, "Se ha adicionado la mascota", null), HttpStatus.OK);
 
     }
@@ -40,8 +41,20 @@ public class ListDECircularController {
         if (location == null) {
             return new ResponseEntity<>(new ResponseDTO(404, "La ubicación no existe", null), HttpStatus.OK);
         }
-        listDECircularService.getPets().addPetToStart(new Pet(PetDTO.getIdentification(), PetDTO.getName(), PetDTO.getAge(), PetDTO.getGender(), location));
+        listDECircularService.getPets().addPetToStart(new Pet(PetDTO.getIdentification(), PetDTO.getName(), PetDTO.getAge(), PetDTO.getGender(), false, location));
         return new ResponseEntity<>(new ResponseDTO(200, "Se ha adicionado el petacón", null), HttpStatus.OK);
 
+    }
+
+    @GetMapping(path = "/dirtydogs")
+    public ResponseEntity<ResponseDTO> dirtyDogs(){
+        listDECircularService.dirtyDogs();
+        return new ResponseEntity<>(new ResponseDTO(200, "los perros se ensuciaron", null), HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/cleanpet")
+    public ResponseEntity<ResponseDTO> cleanPet() throws ListDEException {
+        listDECircularService.cleanPet();
+        return new ResponseEntity<>(new ResponseDTO(200, "los perros se lavaron", null), HttpStatus.OK);
     }
 }

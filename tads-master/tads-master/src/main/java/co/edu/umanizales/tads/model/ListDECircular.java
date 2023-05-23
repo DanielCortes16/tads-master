@@ -1,24 +1,68 @@
 package co.edu.umanizales.tads.model;
 
+import co.edu.umanizales.tads.exception.ListDEException;
 import lombok.Data;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Data
 public class ListDECircular {
     private NodeDE head;
 
     public List<Pet> getPets() {
+        /*
+        Se crea una nueva lista pets
+        Se asigna la cabeza de la lista a el ayudante
+        Se verifica si la lista no esta vacia
+        Se entra en el bucle que recorrerá la lista
+        Se agrega cada perrro a la otra lista
+        Si el ayudante llega a la cabeza es porque recorrio toda la lista
+        Se devuelve el ArrayList pets que contiene todos los elementos de la lista
+        */
         List<Pet> pets = new ArrayList<>();
         NodeDE temp = head;
         if (head != null) {
-            while (temp.getNext() != head) {
+            while (true) {
                 pets.add(temp.getData());
                 temp = temp.getNext();
+                if (temp == head) {
+                    break;
+                }
             }
         }
         return pets;
+    }
+
+    public void addPet(Pet pet) {
+        /*
+        introducimos el perro en un costal
+        Se verifica si la lista no esta vacia
+        Se establece el siguiente nodo de newNode como la cabeza
+        Se establece el nodo anterior de newNode como el nodo anterior de la cabeza
+        Se establece que el nodo anterior de la cabeza su siguiente sea el newNode
+        Se establece el el nodeo anterior a la cabeza como newNode
+        Si la lista está vacia
+        Se establece newNode como la cabeza
+        Se establce el siguiente de la cabeza como la cabeza
+        Se establce el anterior de la cabeza como la cabeza
+        */
+        NodeDE newNode = new NodeDE(pet);
+
+        if (head != null) {
+            newNode.setNext(head);
+            newNode.setPrevious(head.getPrevious());
+            head.getPrevious().setNext(newNode);
+            head.setPrevious(newNode);
+            newNode.getData().setLimpieza(true);
+        } else {
+            head = newNode;
+            head.setNext(newNode);
+            head.setPrevious(newNode);
+            newNode.getData().setLimpieza(true);
+        }
     }
 
     public void addPetToStart(Pet pet) {
@@ -45,28 +89,16 @@ public class ListDECircular {
         }
     }
 
-    public void addPet(Pet pet) {
-/*
-    metemos el nuevo perro en un costal
-    verificamos si la lista no esta vacia
-    nos ubicamos en el ultimo perro (el previo de la cabeza)
-    nuevo costal agarra la cabeza y el previo
-
-    si la lista esta vacia
-    la cabeza seria el costal
-*/
-        NodeDE newNode = new NodeDE(pet);
-
+    public void dirtyDogs() {
+        NodeDE temp = head;
         if (head != null) {
-            newNode = head.getPrevious();
-
-            newNode.setNext(head);
-            newNode.getPrevious();
-
-        } else {
-            head = newNode;
-            head.setNext(head);
-            head.setPrevious(head);
+            while (true) {
+                temp.getData().setLimpieza(false);
+                temp = temp.getNext();
+                if (temp == head) {
+                    break;
+                }
+            }
         }
     }
 
@@ -90,5 +122,43 @@ public class ListDECircular {
             head.setPrevious(head);
         }
     }
+
+    public static int randomNum() {
+        Random random = new Random();
+        int num = random.nextInt(50);
+        return num;
+    }
+
+    public void cleanPet() throws ListDEException {
+        /*
+        Se crea un numero aleatorio y se crea un contador
+        Se verifica si la lsta esta vacia
+        Se verifica si hay 2 o mas mascotas
+        Se crea un ayudante en la cabeza
+        Mientras el contador sea menor al numero aleatorio
+        Recorremos la lista y sumamos al contador
+        Se verifica si la mascota esta limpia
+        Se verifica si hay suficientes mascotas
+         */
+        int rNum = randomNum();
+        int cont = 1;
+        if (head != null) {
+            if (head.getNext() != null) {
+                NodeDE temp = head;
+
+                while (cont < rNum) {
+                    temp = temp.getNext();
+                    cont++;
+                }
+                if (temp.getData().isLimpieza()) {
+                    throw new ListDEException("la mascota se limpio" + rNum);
+                }
+                temp.getData().setLimpieza(true);
+            } else {
+                throw new ListDEException("no hay mascotas suficientes");
+            }
+        }
+    }
+
 
 }// fin de la clase

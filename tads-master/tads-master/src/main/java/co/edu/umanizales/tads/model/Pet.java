@@ -10,5 +10,6 @@ public class Pet {
     private String name;
     private byte age;
     private char gender;
+    private boolean limpieza;
     private Location location;
 }
