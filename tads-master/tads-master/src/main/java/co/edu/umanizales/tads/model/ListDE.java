@@ -1,6 +1,7 @@
 package co.edu.umanizales.tads.model;
 
 import lombok.Data;
+import co.edu.umanizales.tads.exception.ListDEException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -269,58 +270,64 @@ public class ListDE {
         if (head != null) {
             NodeDE temp = head;
             if (head.getData().getIdentification().equals(id)) {
-                head = head.getNext();
-                if (head != null) {
-                    head.setPrevious(null);
+                if (head.getNext() != null) {
+                    temp.getNext().setPrevious(null);
+                    head = head.getNext();
+                } else {
+                    head = null;
                 }
             } else {
-                if (temp.getNext() != null) {
-                    temp.getPrevious().setNext(temp.getNext());
-                    temp.getNext().setPrevious(temp.getPrevious());
-                } else {
-                    temp.getPrevious().setPrevious(null);
+                while (temp != null) {
+                    if (temp.getData().getIdentification().equals(id)) {
+                        if (temp.getNext() != null) {
+                            temp.getPrevious().setNext(temp.getNext());
+                            temp.getNext().setPrevious(temp.getPrevious());
+                        } else {
+                            temp.getPrevious().setPrevious(null);
+                            temp.setPrevious(null);
+                        }
+                    }
+                    temp = temp.getNext();
                 }
-                temp.getNext();
             }
         }
     }
 
-    /*
-        Verificar si la cabeza de la lista no es nula.
-        Inicializar el ayudante (helper) con la cabeza de la lista.
-        Mientras el ayudante no sea nulo y el ID del ayudante no sea igual al ID ingresado:
-        Avanzar el ayudante al siguiente nodo.
-        mientras el ayudante no es nulo:
-        inicualizar un contador en o
-        avanzar el ayudante al siguiente nodo
-        incrementar el contador en 1
-        Asignar el nodo a mover (nodeToMove) con el valor del ayudante.
-        calcular las posiciones a mover restando el contador acual con el numero de posiciones
-    */
-    public void gainXPos(String id, int pos) {
+    public void gainXPos(String id, int pos) throws ListDEException {
+
         NodeDE temp = head;
         int posList = 1;
-        ListDE listcop = new ListDE();
-
         if (head != null) {
-            while (temp != null) {
-                if (!temp.getData().getIdentification().equals(id)) {
-                    listcop.addDE(temp.getData());
-                    temp = temp.getNext();
-                    posList++;
-                } else {
-                    listcop.addToStartDE(temp.getData());
-                    Pet petCop = listcop.getHead().getData();
-                    listcop.setHead(listcop.getHead().getNext());
-                    int posFinal = posList - pos;
-                    listcop.addxPosDE(petCop, posFinal);
-                    temp = temp.getNext();
+            while (temp != null && !temp.getData().getIdentification().equals(id)) {
+                temp = temp.getNext();
+                posList++;
+            }
+            // temp estar en el que hay adelantar
+
+            if (temp == head) {
+                throw new ListDEException("la cabeza no puede avanzar posiciones");
+            } else {
+
+                int posFinal = posList - pos;
+                if (posFinal >= 1) {
+                    Pet petcop = temp.getData();
+                    removePetByID(id);
+                    addxPosDE(petcop, posFinal);
+                }else {
+                    throw new ListDEException("no puede avanzar");
                 }
             }
         }
-
-        head = listcop.getHead();
     }
+    /*
+    verificamos si la lista esta vacia
+    ubicamos el nodo con el id indicado
+    restamos la cantidad de posiciones avanzadas con la posiciones ingresadas
+    si el resultado es menor a 1 no se puede
 
+    creamos una copia de la mascota .getData
+    usamos removePetById
 
+    insertamos la copia de la mascota en el resultaddo de la resta de las posiciones avanzadas con la posiciones ingresadas
+     */
 }//Fin de clase

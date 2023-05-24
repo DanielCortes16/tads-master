@@ -3,6 +3,7 @@ package co.edu.umanizales.tads.controller;
 import co.edu.umanizales.tads.controller.dto.PetDTO;
 import co.edu.umanizales.tads.controller.dto.PetsByLocationDTO;
 import co.edu.umanizales.tads.controller.dto.ResponseDTO;
+import co.edu.umanizales.tads.exception.ListDEException;
 import co.edu.umanizales.tads.model.Location;
 import co.edu.umanizales.tads.model.Pet;
 import co.edu.umanizales.tads.service.ListDEService;
@@ -121,7 +122,7 @@ public class ListDEController {
         return new ResponseEntity<>(new ResponseDTO(200, petsByLocationDTOList, null), HttpStatus.OK);
     }
     @GetMapping(path = "/gainxpos/{id}/{pos}")
-    public ResponseEntity<ResponseDTO> gainXPos(@PathVariable String id, @PathVariable int pos){
+    public ResponseEntity<ResponseDTO> gainXPos(@PathVariable String id, @PathVariable int pos) throws ListDEException {
         listDEService.gainXPos(id, pos);
         return  new ResponseEntity<>(new ResponseDTO(200, "el perro avanzo de posicion", null), HttpStatus.OK);
     }

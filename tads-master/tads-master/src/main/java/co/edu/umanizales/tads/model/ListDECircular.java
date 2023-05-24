@@ -3,7 +3,6 @@ package co.edu.umanizales.tads.model;
 import co.edu.umanizales.tads.exception.ListDEException;
 import lombok.Data;
 
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;

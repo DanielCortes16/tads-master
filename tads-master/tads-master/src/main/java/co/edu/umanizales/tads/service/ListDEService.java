@@ -1,5 +1,6 @@
 package co.edu.umanizales.tads.service;
 
+import co.edu.umanizales.tads.exception.ListDEException;
 import co.edu.umanizales.tads.model.ListDE;
 import co.edu.umanizales.tads.model.Pet;
 import lombok.Data;
@@ -27,5 +28,5 @@ public class ListDEService {
     public void addByNameAtEndDE(String initial){ pets.addByNameAtEndDE(initial);}
     public void changeExtremesDE(){ pets.changeExtremesDE();}
     public void removePetByID(String id){pets.removePetByID(id);}
-    public void gainXPos(String id, int pos){pets.gainXPos(id, pos);}
+    public void gainXPos(String id, int pos) throws ListDEException {pets.gainXPos(id, pos);}
 }
