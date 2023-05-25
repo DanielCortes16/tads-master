@@ -29,4 +29,5 @@ public class ListDEService {
     public void changeExtremesDE(){ pets.changeExtremesDE();}
     public void removePetByID(String id){pets.removePetByID(id);}
     public void gainXPos(String id, int pos) throws ListDEException {pets.gainXPos(id, pos);}
+    public void loseXPos(String id, int pos) throws ListDEException{pets.loseXPos(id, pos);}
 }

@@ -40,7 +40,7 @@ public class ListDEController {
         if (location == null) {
             return new ResponseEntity<>(new ResponseDTO(404, "La ubicación no existe", null), HttpStatus.OK);
         }
-        listDEService.getPets().addDE(new Pet(PetDTO.getIdentification(), PetDTO.getName(), PetDTO.getAge(), PetDTO.getGender(), false, location));
+        listDEService.getPets().addDE(new Pet(PetDTO.getIdentification(), PetDTO.getName(), PetDTO.getAge(), PetDTO.getGender(), false, PetDTO.getFleas(), location));
         return new ResponseEntity<>(new ResponseDTO(200, "Se ha adicionado el petacón", null), HttpStatus.OK);
 
     }
@@ -122,8 +122,25 @@ public class ListDEController {
         return new ResponseEntity<>(new ResponseDTO(200, petsByLocationDTOList, null), HttpStatus.OK);
     }
     @GetMapping(path = "/gainxpos/{id}/{pos}")
-    public ResponseEntity<ResponseDTO> gainXPos(@PathVariable String id, @PathVariable int pos) throws ListDEException {
-        listDEService.gainXPos(id, pos);
-        return  new ResponseEntity<>(new ResponseDTO(200, "el perro avanzo de posicion", null), HttpStatus.OK);
+    public ResponseEntity<ResponseDTO> gainXPos(@PathVariable String id, @PathVariable int pos){
+        try {
+            listDEService.gainXPos(id, pos);
+            return  new ResponseEntity<>(new ResponseDTO(200, "el perro avanzo de posicion", null), HttpStatus.OK);
+        } catch (ListDEException e) {
+            return  new ResponseEntity<>(new ResponseDTO(409, e.getMessage(), null), HttpStatus.CONFLICT);
+        }
+
+    }
+
+    @GetMapping(path = "/losexpos/{id}/{pos}")
+    public ResponseEntity<ResponseDTO> loseXPos(@PathVariable String id,@PathVariable int pos){
+        try {
+            listDEService.loseXPos(id, pos);
+            return new ResponseEntity<>(new ResponseDTO(200, "el perro perdio posiciones", null), HttpStatus.OK);
+        } catch (ListDEException e) {
+            return new ResponseEntity<>(new ResponseDTO(409, e.getMessage(), null), HttpStatus.CONFLICT);
+
+        }
+
     }
 }

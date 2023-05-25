@@ -11,5 +11,6 @@ public class Pet {
     private byte age;
     private char gender;
     private boolean limpieza;
+    private int fleas;
     private Location location;
 }

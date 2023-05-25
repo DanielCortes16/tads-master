@@ -253,22 +253,25 @@ public class ListDE {
         }
     }
 
+
     public void removePetByID(String id) {
-                /*
-        si la lista no esta vacia
-            asignamos un ayudante a la cabeza
-            si la cabeza contiene la identificacion dada
-                la cabeza sera igual al siguiente y el anterior sera vacio.
+            /*
+si la lista no esta vacia
+asignamos un ayudante a la cabeza
+si la cabeza contiene la identificacion dada
+la cabeza sera igual al siguiente y el anterior sera vacio.
 
-        si no
-                si el ayudante no es el ultimo nodo
-                el nodo anterior al ayudante agarre al nodo siguiente del ayudante
-                el nodo siguiente al ayudante agarra al nodo anterior del ayudante
+si no
+si el ayudante no es el ultimo nodo
+el nodo anterior al ayudante agarre al nodo siguiente del ayudante
+el nodo siguiente al ayudante agarra al nodo anterior del ayudante
 
-                si no el nodo anterior al ayudante agarre al nodo siguiente del ayudante
-         */
+si no el nodo anterior al ayudante agarre al nodo siguiente del ayudante
+*/
         if (head != null) {
             NodeDE temp = head;
+
+            // Verificar si la cabeza contiene la identificación dada
             if (head.getData().getIdentification().equals(id)) {
                 if (head.getNext() != null) {
                     temp.getNext().setPrevious(null);
@@ -280,18 +283,21 @@ public class ListDE {
                 while (temp != null) {
                     if (temp.getData().getIdentification().equals(id)) {
                         if (temp.getNext() != null) {
+                            // El nodo a eliminar no es el último nodo
                             temp.getPrevious().setNext(temp.getNext());
                             temp.getNext().setPrevious(temp.getPrevious());
                         } else {
-                            temp.getPrevious().setPrevious(null);
-                            temp.setPrevious(null);
+                            // El nodo a eliminar es el último nodo
+                            temp.getPrevious().setNext(null);
                         }
+                        return; // Se encontró y eliminó el nodo, se sale del método
                     }
                     temp = temp.getNext();
                 }
             }
         }
     }
+
 
     public void gainXPos(String id, int pos) throws ListDEException {
 
@@ -313,13 +319,12 @@ public class ListDE {
                     Pet petcop = temp.getData();
                     removePetByID(id);
                     addxPosDE(petcop, posFinal);
-                }else {
+                } else {
                     throw new ListDEException("no puede avanzar");
                 }
             }
         }
-    }
-    /*
+            /*
     verificamos si la lista esta vacia
     ubicamos el nodo con el id indicado
     restamos la cantidad de posiciones avanzadas con la posiciones ingresadas
@@ -330,4 +335,29 @@ public class ListDE {
 
     insertamos la copia de la mascota en el resultaddo de la resta de las posiciones avanzadas con la posiciones ingresadas
      */
+    }
+
+    public void loseXPos(String id, int pos) throws ListDEException {
+        NodeDE temp = head;
+        int posList = 1;
+        if (head != null) {
+            while (temp != null && !temp.getData().getIdentification().equals(id)) {
+                temp = temp.getNext();
+                posList++;
+            }// temp esta en el id
+            if (temp.getNext() == null) {
+                throw new ListDEException("el ultimo no puede perder posiciones");
+            }else {
+                int posFinal = posList + pos;
+                if (posFinal >= 1) {
+                    Pet petcop = temp.getData();
+                    removePetByID(id);
+                    addxPosDE(petcop, posFinal);
+                }else{
+                    throw new ListDEException("no puede avanzar");
+                }
+            }
+        }
+    }
+
 }//Fin de clase

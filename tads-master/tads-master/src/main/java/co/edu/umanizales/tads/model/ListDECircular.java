@@ -56,11 +56,13 @@ public class ListDECircular {
             head.getPrevious().setNext(newNode);
             head.setPrevious(newNode);
             newNode.getData().setLimpieza(true);
+            newNode.getData().setFleas(putFleas());
         } else {
             head = newNode;
             head.setNext(newNode);
             head.setPrevious(newNode);
             newNode.getData().setLimpieza(true);
+            newNode.getData().setFleas(putFleas());
         }
     }
 
@@ -157,6 +159,46 @@ public class ListDECircular {
                 throw new ListDEException("no hay mascotas suficientes");
             }
         }
+    }
+
+    public int putFleas() {
+        Random fleas = new Random();
+        int rFleas = fleas.nextInt(50);
+        return rFleas;// cantidada de pulgas random
+    }
+
+
+    public Pet getPetWithMoreFleas() {
+     /*
+    Se verifica si la lista tiene datos
+    Asignamos un ayudante a la cabeza
+    Creamos una mascota copia
+    Mientras hayan datos
+    Si el ayudante tiene mas pulgas que la cabeza
+    Asignamos los datos a la copia
+    El ayudante avanza
+    si no
+    El ayudante avanza
+    Retornamos la amsocta con mas pulgas
+     */
+        Pet pet = null;
+        if (head != null) {
+            NodeDE temp = head;
+            Pet petCop = head.getData();
+            while (true) {
+                if (temp.getData().getFleas() > petCop.getFleas()) {
+                    petCop = temp.getData();
+                    temp = temp.getNext();
+                } else {
+                    temp = temp.getNext();
+                }
+                if (temp == head) {
+                    break;
+                }
+                pet = petCop;
+            }
+        }
+        return pet;
     }
 
 
