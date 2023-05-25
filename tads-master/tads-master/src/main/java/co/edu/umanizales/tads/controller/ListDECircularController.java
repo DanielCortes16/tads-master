@@ -13,8 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
+
 
 
 @RestController
@@ -74,6 +73,6 @@ public class ListDECircularController {
         FleasDTO fleasDTO = new FleasDTO();
         fleasDTO.setName(pet.getName());
         fleasDTO.setFleas(pet.getFleas());
-        return ResponseEntity.ok(new ResponseDTO(200, fleasDTO, null));
+        return new ResponseEntity<>(new ResponseDTO(200, fleasDTO, null), HttpStatus.OK);
     }
 }
